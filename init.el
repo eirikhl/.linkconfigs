@@ -29,8 +29,15 @@
   (require 'use-package))
 (setq use-package-always-ensure t)
 
+
 ;; Disable startup message
 (setq inhibit-startup-message t)
+
+
+;; Auto-complete thingamajig
+(ac-config-default)
+
+
 
 
 ;; Move current line one space up
@@ -79,11 +86,12 @@
 ;; Bind "uncomment-region" To Ctrl-c Ctrl-v
 (global-set-key (kbd "C-c C-v") 'uncomment-region)
 
-;; Change default font colour
-(add-to-list 'default-frame-alist '(foreground-color . "#8F8F8F"))
-
-;; Change default background colour
-(add-to-list 'default-frame-alist '(background-color . "#222222"))
+;; Change default colour theme
+(load-theme 'base16-spacemacs t)
+;; Change cursor and line highlighting
+(set-default 'cursor-type 'bar)
+(global-hl-line-mode 1)
+(set-face-attribute hl-line-face nil :underline t)
 
 ;; Disable toolbar
 (tool-bar-mode -1)
