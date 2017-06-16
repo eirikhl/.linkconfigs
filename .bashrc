@@ -123,6 +123,8 @@ fi
 LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH 
 export LIBRARY_PATH
 
+export PATH="/etc/tor-browser_en-US/start-tor-browser.desktop"
+
 alias cc='cd ..'
 alias vim='emacs'
 alias rf='rm -rf'

@@ -35,9 +35,10 @@
 
 
 ;; Auto-complete thingamajig
+(unless (package-installed-p 'auto-complete)
+  (package-refresh-contents)
+  (package-install 'auto-complete))
 (ac-config-default)
-
-
 
 
 ;; Move current line one space up
@@ -85,6 +86,9 @@
 (global-set-key (kbd "C-c C-c") 'comment-region)
 ;; Bind "uncomment-region" To Ctrl-c Ctrl-v
 (global-set-key (kbd "C-c C-v") 'uncomment-region)
+
+;; Bind "eval-region" to Ctrl-e Ctrl-r
+(global-set-key (kbd "C-c C-e") 'eval-region)
 
 ;; Change default colour theme
 (load-theme 'base16-spacemacs t)
