@@ -74,6 +74,11 @@
 ;; Bind "goto-line" to Alt-s
 (global-set-key (kbd "M-s") 'goto-line)
 
+;; Bind "comment-region" to Ctrl-c Ctrl-c
+(global-set-key (kbd "C-c C-c") 'comment-region)
+;; Bind "uncomment-region" To Ctrl-c Ctrl-v
+(global-set-key (kbd "C-c C-v") 'uncomment-region)
+
 ;; Change default font colour
 (add-to-list 'default-frame-alist '(foreground-color . "#8F8F8F"))
 
@@ -91,6 +96,7 @@
 	    (define-key c-mode-map "{" 'electric-pair)
 	    (define-key c-mode-map "[" 'electric-pair)
 	    (define-key c-mode-map "\"" 'electric-pair)))
+
 ;; Make emacs add matching parenthesis in C++-mode
 (defun electric-pair () (interactive) (if (eolp) (let (parens-require-spaces) (insert-pair)) (self-insert-command 1)))
 (add-hook 'c++-mode-hook
@@ -100,6 +106,16 @@
 	    (define-key c-mode-map "[" 'electric-pair)
 	    (define-key c-mode-map "\"" 'electric-pair)))
 
+;; Automatically save and restore sessions
+(setq desktop-dirname             "~/.emacs.d/desktop/"
+      desktop-base-file-name      "emacs.desktop"
+      desktop-base-lock-name      "lock"
+      desktop-path                (list desktop-dirname)
+      desktop-save                t
+      desktop-files-not-to-save   "^$" ;reload tramp paths
+      desktop-load-locked-desktop nil
+      desktop-auto-save-timeout   30)
+(desktop-save-mode 1)
 
 ;; Restart emacs from within emacs
 (defun launch-separate-emacs-in-terminal ()
