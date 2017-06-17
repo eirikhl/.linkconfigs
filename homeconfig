@@ -162,5 +162,12 @@ bar {
 # Make lockscreen kinda pretty
 bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 
-#exec_always cd ~/.linkconfigs && git pull --rebase &> ~/.i3log
-exec --no-startup-id LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
+# Pull potential changes to configs
+exec cd ~/.linkconfigs && git pull
+
+# Fix triple screen bullshit
+exec --no-startup-id xrandr --output VGA --off
+
+# Start up Steam, trying to avoid errors
+exec --no-startup-id i3-msg 'workspace 3; LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
+
