@@ -162,4 +162,6 @@ bar {
 # Make lockscreen kinda pretty
 bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 
-exec_always cd ~/.linkconfigs && git pull --rebase &> ~/.i3log
+exec_always cd /home/eirlun01/.linkconfigs && git pull --rebase &> ~/.i3log
+
+exec_always cd / && ./usr/bin/numlockx on

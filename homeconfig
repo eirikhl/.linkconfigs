@@ -145,7 +145,7 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
+	# back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -155,7 +155,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        status_command /home/eirik/.bin/get_temp.sh
         tray_output primary
 }
 
@@ -166,8 +166,14 @@ bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 exec cd ~/.linkconfigs && git pull
 
 # Fix triple screen bullshit
-exec --no-startup-id xrandr --output VGA --off
+exec xrandr --output VGA1 --off
 
 # Start up Steam, trying to avoid errors
-exec --no-startup-id i3-msg 'workspace 3; LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
+exec --no-startup-id i3-msg 'workspace 2; LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
 
+# Activate NumLock
+exec_always cd / && ./usr/bin/numlockx on
+
+bindsym $mod+Ctrl+1 exec setxkbmap no
+bindsym $mod+Ctrl+2 exec setxkbmap hr
+bindsym $mod+Ctrl+3 exec setxkbmap ru
