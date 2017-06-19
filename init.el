@@ -30,15 +30,21 @@
 (setq use-package-always-ensure t)
 
 
-;; Disable startup message
-(setq inhibit-startup-message t)
-
-
 ;; Auto-complete thingamajig
 (unless (package-installed-p 'auto-complete)
   (package-refresh-contents)
   (package-install 'auto-complete))
 (ac-config-default)
+
+
+;; Automatically install base16
+(unless (package-installed-p 'base16-theme)
+  (package-refresh-contents)
+  (package-install 'base16-theme))
+
+
+;; Disable startup message
+(setq inhibit-startup-message t)
 
 
 ;; Move current line one space up
@@ -63,6 +69,7 @@
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-s") 'swiper)
+
 
 ;; Bind "next-buffer" and "previous-buffer" to sensible keys
 (global-set-key (kbd "M-q") 'previous-buffer)
@@ -90,6 +97,7 @@
 ;; Bind "eval-region" to Ctrl-e Ctrl-r
 (global-set-key (kbd "C-c C-e") 'eval-region)
 
+
 ;; Change default colour theme
 (load-theme 'base16-spacemacs t)
 ;; Change cursor and line highlighting
@@ -99,6 +107,7 @@
 
 ;; Disable toolbar
 (tool-bar-mode -1)
+
 
 ;; Make emacs add matching parenthesis in C-mode
 (defun electric-pair () (interactive) (if (eolp) (let (parens-require-spaces) (insert-pair)) (self-insert-command 1)))
@@ -118,6 +127,7 @@
 	    (define-key c-mode-map "[" 'electric-pair)
 	    (define-key c-mode-map "\"" 'electric-pair)))
 
+
 ;; Automatically save and restore sessions
 (setq desktop-dirname             "~/.emacs.d/desktop/"
       desktop-base-file-name      "emacs.desktop"
@@ -128,6 +138,7 @@
       desktop-load-locked-desktop nil
       desktop-auto-save-timeout   30)
 (desktop-save-mode 1)
+
 
 ;; Restart emacs from within emacs
 (defun launch-separate-emacs-in-terminal ()
@@ -172,38 +183,37 @@
 
 
 ;; Unholy abomination which should make Ctrl-backspace fancy
-;(defun aborn/backward-kill-word ()
-;  "Customize/Smart backward-kill-word."
-;  (interactive)
-;  (let* ((cp (point))
-;         (backword)
-;         (end)
-;         (space-pos)
-;         (backword-char (if (bobp)
-;                            ""           ;; cursor in begin of buffer
-;                          (buffer-substring cp (- cp 1)))))
-;    (if (equal (length backword-char) (string-width backword-char))
-;        (progn
-;          (save-excursion
-;            (setq backword (buffer-substring (point) (progn (forward-word -1) (point)))))
-;          (setq ab/debug backword)
-;          (save-excursion
-;            (when (and backword          ;; when backword contains space
-;                       (s-contains? " " backword))
-;              (setq space-pos (ignore-errors (search-backward " ")))))
-;          (save-excursion
-;            (let* ((pos (ignore-errors (search-backward-regexp "\n")))
-;                   (substr (when pos (buffer-substring pos cp))))
-;              (when (or (and substr (s-blank? (s-trim substr)))
-;                        (s-contains? "\n" backword))
-;                (setq end pos))))
-;          (if end
-;              (kill-region cp end)
-;            (if space-pos
-;                (kill-region cp space-pos)
-;              (backward-kill-word 1))))
-;      (kill-region cp (- cp 1)))         ;; word is non-english word
-;    ))
-
-;(global-set-key  [C-backspace]
-;            'aborn/backward-kill-word)
+;; (defun aborn/backward-kill-word ()
+;;   "Customize/Smart backward-kill-word."
+;;   (interactive)
+;;   (let* ((cp (point))
+;;          (backword)
+;;          (end)
+;;          (space-pos)
+;;          (backword-char (if (bobp)
+;;                             ""           ;; cursor in begin of buffer
+;;                           (buffer-substring cp (- cp 1)))))
+;;     (if (equal (length backword-char) (string-width backword-char))
+;;         (progn
+;;           (save-excursion
+;;             (setq backword (buffer-substring (point) (progn (forward-word -1) (point)))))
+;;           (setq ab/debug backword)
+;;           (save-excursion
+;;             (when (and backword          ;; when backword contains space
+;;                        (s-contains? " " backword))
+;;               (setq space-pos (ignore-errors (search-backward " ")))))
+;;           (save-excursion
+;;             (let* ((pos (ignore-errors (search-backward-regexp "\n")))
+;;                    (substr (when pos (buffer-substring pos cp))))
+;;               (when (or (and substr (s-blank? (s-trim substr)))
+;;                         (s-contains? "\n" backword))
+;;                 (setq end pos))))
+;;           (if end
+;;               (kill-region cp end)
+;;             (if space-pos
+;;                 (kill-region cp space-pos)
+;;               (backward-kill-word 1))))
+;;       (kill-region cp (- cp 1)))         ;; word is non-english word
+;;     ))
+;; (global-set-key  [C-backspace]
+;;             'aborn/backward-kill-word)

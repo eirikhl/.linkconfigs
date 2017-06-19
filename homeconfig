@@ -162,8 +162,6 @@ bar {
 # Make lockscreen kinda pretty
 bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 
-# Pull potential changes to configs
-exec cd ~/.linkconfigs && git pull
 
 # Fix triple screen bullshit
 exec xrandr --output VGA1 --off
@@ -177,3 +175,6 @@ exec_always cd / && ./usr/bin/numlockx on
 bindsym $mod+Ctrl+1 exec setxkbmap no
 bindsym $mod+Ctrl+2 exec setxkbmap hr
 bindsym $mod+Ctrl+3 exec setxkbmap ru
+
+# Pull potential changes to configs
+exec cd ~/.linkconfigs && git pull
