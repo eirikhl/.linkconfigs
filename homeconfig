@@ -162,19 +162,16 @@ bar {
 # Make lockscreen kinda pretty
 bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 
-
 # Fix triple screen bullshit
 exec xrandr --output VGA1 --off
 
 # Start up Steam, trying to avoid errors
 exec --no-startup-id i3-msg 'workspace 2; LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
 
-# Activate NumLock
-exec_always cd / && ./usr/bin/numlockx on
-
+# Change between keyboards
 bindsym $mod+Ctrl+1 exec setxkbmap no
 bindsym $mod+Ctrl+2 exec setxkbmap hr
 bindsym $mod+Ctrl+3 exec setxkbmap ru
 
-# Pull potential changes to configs
-exec cd ~/.linkconfigs && git pull
+# Things that all my computers should do
+exec ~/.linkconfigs/always_do.sh
