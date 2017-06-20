@@ -163,4 +163,5 @@ bar {
 bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 
 # Things that all my computers should do
+# Currently includes NumLock and git pull
 exec ~/.linkconfigs/always_do.sh

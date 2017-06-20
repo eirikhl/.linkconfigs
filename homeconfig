@@ -79,7 +79,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -94,6 +94,9 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+# make a (floating) window "stick", i.e. follow workspace focus
+bindsym $mod+Shift+s sticky toggl
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -166,7 +169,8 @@ bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 exec xrandr --output VGA1 --off
 
 # Start up Steam, trying to avoid errors
-exec --no-startup-id i3-msg 'workspace 2; LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
+#exec --no-startup-id i3-msg 'workspace 2; LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
+exec --no-startup-id i3-msg 'workspace 3; steam'
 
 # Change between keyboards
 bindsym $mod+Ctrl+1 exec setxkbmap no
@@ -174,4 +178,5 @@ bindsym $mod+Ctrl+2 exec setxkbmap hr
 bindsym $mod+Ctrl+3 exec setxkbmap ru
 
 # Things that all my computers should do
-exec_always ~/.linkconfigs/always_do.sh
+exec_always ~/.linkconfigs/always_do.s
+h
