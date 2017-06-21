@@ -169,7 +169,7 @@ bindsym --release $mod+l exec --no-startup-id i3lock -c 202020
 exec xrandr --output VGA1 --off
 
 # Start up Steam, trying to avoid errors
-exec --no-startup-id i3-msg 'workspace 2; LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 steam
+exec --no-startup-id i3-msg 'workspace 2; LD_PRELOAD='/usr/$LIB/libstdc++.so.6 DISPLAY=:0 steam
 #exec --no-startup-id i3-msg 'workspace 3; steam'
 
 # Change between keyboards
@@ -189,8 +189,8 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 # i3-gaps stuff
 smart_gaps on
 
-gaps inner 5
-gaps outer 5
+gaps inner 4
+gaps outer 4
 
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
