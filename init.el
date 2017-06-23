@@ -61,7 +61,7 @@
   (transpose-lines 1)
   (forward-line -1))
 (global-set-key (kbd "M-<down>") 'move-line-down)
-
+ 
 
 ;; Ivy does fancy shit
 (use-package ivy)
@@ -74,6 +74,11 @@
 ;; Bind "next-buffer" and "previous-buffer" to sensible keys
 (global-set-key (kbd "M-q") 'previous-buffer)
 (global-set-key (kbd "M-e") 'next-buffer)
+
+;; Bind copy, paste and cut to sensible keys
+(global-set-key (kbd "C-a") 'yank) ; paste
+(global-set-key (kbd "C-w") 'kill-ring-save) ; copy
+(global-set-key (kbd "M-w") 'kill-ring) ; cut
 
 ;; Bind "undo" to Ctrl-z
 (global-set-key (kbd "C-z") 'undo)
