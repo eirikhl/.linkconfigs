@@ -113,6 +113,8 @@
 ;; Disable toolbar
 (tool-bar-mode -1)
 
+;; Display line numbers
+(global-linum-mode t)
 
 ;; Make emacs add matching parenthesis in C-mode
 (defun electric-pair () (interactive) (if (eolp) (let (parens-require-spaces) (insert-pair)) (self-insert-command 1)))
