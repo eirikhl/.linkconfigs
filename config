@@ -42,6 +42,11 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+
+# assign default workspaces for various programs
+assign [class="(?i)vivaldi"] 1
+
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
