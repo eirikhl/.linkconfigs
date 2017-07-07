@@ -107,7 +107,8 @@
 
 ;; Save buffer/file
 (global-set-key (kbd "C-q C-o") 'save-buffer)
-
+;; Open file
+(global-set-key (kbd "C-q C-u") 'find-file)
 
 ;; Change default colour theme
 (load-theme 'base16-spacemacs t)

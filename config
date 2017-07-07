@@ -152,12 +152,17 @@ bar {
         tray_output primary
 }
 
+# Swap Caps Lock and Escape
+exec setxkbmap -option caps:swapescape
 
-# Make lockscreen kinda pretty
-bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
+# Make lockscreen kinda pretty, and ensure I can log in again
 bindsym --release $mod+Shift+l exec "setxkbmap no && i3lock -c 202020"
+
+bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
 
 # Things that all my computers should do
 # Currently includes NumLock, changing Caps Lock and git pull
 exec ~/.linkconfigs/always_do.sh
+
+
 
