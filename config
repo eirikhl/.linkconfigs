@@ -153,16 +153,16 @@ bar {
 }
 
 # Swap Caps Lock and Escape
-exec setxkbmap -option caps:swapescape
+xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
+xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 
-# Make lockscreen kinda pretty, and ensure I can log in again
-bindsym --release $mod+Shift+l exec "setxkbmap no && i3lock -c 202020"
+# Make lockscreen kinda pretty
+bindsym --release $mod+Shift+l exec i3lock -c 202020
 
+bindsym $mod+Shift+n exec setxkbmap no
 bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
 
 # Things that all my computers should do
 # Currently includes NumLock, changing Caps Lock and git pull
 exec ~/.linkconfigs/always_do.sh
-
-
 

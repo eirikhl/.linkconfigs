@@ -53,6 +53,7 @@
   (transpose-lines 1)
   (forward-line -2))
 (global-set-key (kbd "M-<up>") 'move-line-up)
+(global-set-key (kbd "M-c") 'move-line-up)
 
 ;; Move current line one space down
 (defun move-line-down ()
@@ -61,7 +62,14 @@
   (transpose-lines 1)
   (forward-line -1))
 (global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key (kbd "M-t") 'move-line-down)
  
+;; Navigation commands
+(global-set-key (kbd "C-c") 'previous-line)
+(global-set-key (kbd "C-t") 'next-line)
+(global-set-key (kbd "C-h") 'backward-char)
+(global-set-key (kbd "C-n") 'forward-char)
+
 
 ;; Ivy does fancy shit
 (use-package ivy)
@@ -74,44 +82,37 @@
 ;; Set Ctrl-q == Ctrl-x, for Dvorak practicality
 (global-set-key (kbd "C-q") ctl-x-map)
 
-;; Bind "next-buffer" and "previous-buffer" to sensible keys
+;;; Various keybindings I think make sense
 (global-set-key (kbd "M-å") 'previous-buffer)
 (global-set-key (kbd "M-.") 'next-buffer)
 
-;; Bind copy, paste and cut to sensible keys
 (global-set-key (kbd "C-a") 'yank) ; paste
 (global-set-key (kbd "C-,") 'kill-ring-save) ; copy
 (global-set-key (kbd "M-,") 'kill-ring) ; cut
 
-;; Bind "undo" to Ctrl-z
 (global-set-key (kbd "C-æ") 'undo)
 
-;; Bind "backspace" to Alt-r
 (global-set-key (kbd "M-p") 'delete-backward-char)
-;; Bind "Ctrl-backspace" to Alt-t
+
 (global-set-key (kbd "M-y") 'backward-kill-word)
 
-;; Bind "kill-buffer" to Ctrl-x x
+(global-set-key (kbd "C-k") 'kill-line)
+
 (global-set-key (kbd "C-q q") 'kill-buffer)
 
-;; Bind "goto-line" to Alt-s
 (global-set-key (kbd "M-o") 'goto-line)
 
-;; Bind "comment-region" to Ctrl-c Ctrl-c
 (global-set-key (kbd "C-q C-j") 'comment-region)
-;; Bind "uncomment-region" To Ctrl-c Ctrl-v
 (global-set-key (kbd "C-q C-k") 'uncomment-region)
 
-;; Bind "eval-region" to Ctrl-e Ctrl-r
 (global-set-key (kbd "C-q C-.") 'eval-region)
 
-;; Save buffer/file
 (global-set-key (kbd "C-q C-o") 'save-buffer)
-;; Open file
 (global-set-key (kbd "C-q C-u") 'find-file)
 
+
 ;; Change default colour theme
-(load-theme 'base16-spacemacs t)
+(load-theme 'base16-solarflare t)
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
 (global-hl-line-mode 1)
@@ -123,23 +124,22 @@
 ;; Display line numbers
 (global-linum-mode t)
 
-;; Make emacs add matching parenthesis in C-mode
-(defun electric-pair () (interactive) (if (eolp) (let (parens-require-spaces) (insert-pair)) (self-insert-command 1)))
-(add-hook 'c-mode-hook
-	  (lambda ()
-	    (define-key c-mode-map "(" 'electric-pair)
-	    (define-key c-mode-map "{" 'electric-pair)
-	    (define-key c-mode-map "[" 'electric-pair)
-	    (define-key c-mode-map "\"" 'electric-pair)))
 
-;; Make emacs add matching parenthesis in C++-mode
-(defun electric-pair () (interactive) (if (eolp) (let (parens-require-spaces) (insert-pair)) (self-insert-command 1)))
-(add-hook 'c++-mode-hook
-	  (lambda ()
-	    (define-key c-mode-map "(" 'electric-pair)
-	    (define-key c-mode-map "{" 'electric-pair)
-	    (define-key c-mode-map "[" 'electric-pair)
-	    (define-key c-mode-map "\"" 'electric-pair)))
+;; Make emacs add matching parenthesis
+;; enable skeleton-pair insert globally
+   (setq skeleton-pair t)
+  ;;(setq skeleton-pair-on-word t)
+  ;; Uncomment if curly braces won't close in .R files
+  ;; https://github.com/emacs-ess/ESS/issues/296#issuecomment-189614821
+  ;;(define-key ess-mode-map (kbd "{") nil)
+  ;;(define-key ess-mode-map (kbd "}") nil) 
+   (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
 
 
 ;; Automatically save and restore sessions
