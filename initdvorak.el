@@ -65,14 +65,14 @@
 (global-set-key (kbd "M-t") 'move-line-down)
  
 ;; Navigation commands
-(global-set-key (kbd "C-c") 'previous-line)
+(global-set-key (kbd "C-r") 'previous-line)
 (global-set-key (kbd "C-t") 'next-line)
 (global-set-key (kbd "C-h") 'backward-char)
 (global-set-key (kbd "C-n") 'forward-char)
 
 
 ;; Ivy does fancy shit
-(use-package ivy)
+(use-package ivy)t
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
@@ -88,7 +88,7 @@
 
 (global-set-key (kbd "C-a") 'yank) ; paste
 (global-set-key (kbd "C-,") 'kill-ring-save) ; copy
-(global-set-key (kbd "M-,") 'kill-ring) ; cut
+(global-set-key (kbd "M-,") 'kill-region) ; cut
 
 (global-set-key (kbd "C-æ") 'undo)
 
@@ -109,6 +109,8 @@
 
 (global-set-key (kbd "C-q C-o") 'save-buffer)
 (global-set-key (kbd "C-q C-u") 'find-file)
+
+(global-set-key (kbd "C-q C-j") 'save-buffers-kill-emacs)
 
 
 ;; Change default colour theme
@@ -168,6 +170,7 @@
 				    #'launch-separate-emacs-in-terminal)))))
     (save-buffers-kill-emacs)))
 (global-set-key (kbd "C-q C-p") 'restart-emacs)
+(global-set-key (kbd "C-M-p") 'restart-emacs)
 
 
 ;; Unholy abomination which should display total line number

@@ -78,7 +78,7 @@
 ;; Bind copy, paste and cut to sensible keys
 (global-set-key (kbd "C-a") 'yank) ; paste
 (global-set-key (kbd "C-w") 'kill-ring-save) ; copy
-(global-set-key (kbd "M-w") 'kill-ring) ; cut
+(global-set-key (kbd "M-w") 'kill-region) ; cut
 
 ;; Bind "undo" to Ctrl-z
 (global-set-key (kbd "C-z") 'undo)

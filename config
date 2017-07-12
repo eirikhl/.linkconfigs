@@ -45,6 +45,7 @@ bindsym $mod+d exec dmenu_run
 
 # assign default workspaces for various programs
 assign [class="(?i)vivaldi"] 1
+assign [class="(?i)emacs"] 2
 
 
 # shift focus
@@ -153,8 +154,8 @@ bar {
 }
 
 # Swap Caps Lock and Escape
-xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
-xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+exec xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
+exec xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 
 # Make lockscreen kinda pretty
 bindsym --release $mod+Shift+l exec i3lock -c 202020
