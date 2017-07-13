@@ -116,7 +116,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+p restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -154,16 +154,19 @@ bar {
 }
 
 # Swap Caps Lock and Escape
-exec xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
-exec xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+exec_always xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
+exec_always xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 
 # Make lockscreen kinda pretty
 bindsym --release $mod+Shift+l exec i3lock -c 202020
 
+# Keyboard stuff, changing to Dvorak as default
 bindsym $mod+Shift+n exec setxkbmap no
 bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
+bindsym $mod+Ctrl+1 exec setxkbmap no -variant dvorak # Safety measure
+exec setxkbmap no -variant dvorak
 
 # Things that all my computers should do
 # Currently includes NumLock, changing Caps Lock and git pull
 exec ~/.linkconfigs/always_do.sh
-
+exec restart

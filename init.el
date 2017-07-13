@@ -112,7 +112,8 @@
 
 ;; Disable toolbar
 (tool-bar-mode -1)
-
+;; Disable menubar
+(menu-bar-mode -1)
 ;; Display line numbers
 (global-linum-mode t)
 
