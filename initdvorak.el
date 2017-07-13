@@ -77,9 +77,6 @@
 
 (global-set-key (kbd "M-o") 'goto-line)
 
-(global-set-key (kbd "C-q C-j") 'comment-region)
-(global-set-key (kbd "C-q C-k") 'uncomment-region)
-
 (global-set-key (kbd "C-q C-.") 'eval-region)
 
 (global-set-key (kbd "C-q C-o") 'save-buffer)
@@ -131,6 +128,12 @@
 (global-set-key (kbd "C-t") 'next-line)
 (global-set-key (kbd "C-h") 'backward-char)
 (global-set-key (kbd "C-n") 'forward-char)
+
+(defun toggle-comment-on-line ()
+  "comment or uncomment current line"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+(bind-key "C-j" 'toggle-comment-on-line)
 
 ;; Cycle through open "tiles"
 (defun swindow()
