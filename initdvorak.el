@@ -129,11 +129,16 @@
 (global-set-key (kbd "C-h") 'backward-char)
 (global-set-key (kbd "C-n") 'forward-char)
 
-(defun toggle-comment-on-line ()
-  "comment or uncomment current line"
-  (interactive)
-  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
-(bind-key "C-j" 'toggle-comment-on-line)
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)
+        (next-line)))
+(bind-key "C-j" 'comment-or-uncomment-region-or-line)
 
 ;; Cycle through open "tiles"
 (defun swindow()
