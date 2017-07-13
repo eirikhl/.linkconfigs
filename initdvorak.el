@@ -14,6 +14,7 @@
  )
 
 
+;;;; Package stuff
 ;; Melpa = package managing and stuff
 (require 'package)
 (add-to-list 'package-archives
@@ -24,11 +25,9 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-
 (eval-when-compile
   (require 'use-package))
 (setq use-package-always-ensure t)
-
 
 ;; Auto-complete thingamajig
 (unless (package-installed-p 'auto-complete)
@@ -36,40 +35,10 @@
   (package-install 'auto-complete))
 (ac-config-default)
 
-
 ;; Automatically install base16
 (unless (package-installed-p 'base16-theme)
   (package-refresh-contents)
   (package-install 'base16-theme))
-
-
-;; Disable startup message
-(setq inhibit-startup-message t)
-
-
-;; Move current line one space up
-(defun move-line-up ()
-  (interactive)
-  (transpose-lines 1)
-  (forward-line -2))
-(global-set-key (kbd "M-<up>") 'move-line-up)
-(global-set-key (kbd "M-c") 'move-line-up)
-
-;; Move current line one space down
-(defun move-line-down ()
-  (interactive)
-  (forward-line 1)
-  (transpose-lines 1)
-  (forward-line -1))
-(global-set-key (kbd "M-<down>") 'move-line-down)
-(global-set-key (kbd "M-t") 'move-line-down)
- 
-;; Navigation commands
-(global-set-key (kbd "C-c") 'previous-line)
-(global-set-key (kbd "C-t") 'next-line)
-(global-set-key (kbd "C-h") 'backward-char)
-(global-set-key (kbd "C-n") 'forward-char)
-
 
 ;; Ivy does fancy shit
 (use-package ivy)
@@ -78,17 +47,23 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-o") 'swiper)
 
+;; Directory for arbitrary libraries
+(add-to-list 'load-path "~/.emacs.d/libs")
 
-;; Set Ctrl-q == Ctrl-x, for Dvorak practicality
-(global-set-key (kbd "C-q") ctl-x-map)
+;; Text highlighting
+(load-library "markerpen")
 
-;;; Various keybindings I think make sense
+
+;;;; Various keybindings I think make sense
+;; Set Ctrl+q == Ctrl+x, for Dvorak practicality
+(global-set-key (kbd "C-q") ctl-x-map) 
+
 (global-set-key (kbd "M-å") 'previous-buffer)
 (global-set-key (kbd "M-.") 'next-buffer)
 
 (global-set-key (kbd "C-a") 'yank) ; paste
 (global-set-key (kbd "C-,") 'kill-ring-save) ; copy
-(global-set-key (kbd "M-,") 'kill-ring) ; cut
+(global-set-key (kbd "M-,") 'kill-region) ; cut
 
 (global-set-key (kbd "C-æ") 'undo)
 
@@ -110,9 +85,12 @@
 (global-set-key (kbd "C-q C-o") 'save-buffer)
 (global-set-key (kbd "C-q C-u") 'find-file)
 
+(global-set-key (kbd "C-q C-j") 'save-buffers-kill-emacs)
 
+
+;;;; Visual stuff
 ;; Change default colour theme
-(load-theme 'base16-solarflare t)
+(load-theme 'base16-isotope t)
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
 (global-hl-line-mode 1)
@@ -120,10 +98,46 @@
 
 ;; Disable toolbar
 (tool-bar-mode -1)
-
+;; Disable menubar
+(menu-bar-mode -1)
+;; Disable scroll bar
+(scroll-bar-mode -1)
 ;; Display line numbers
 (global-linum-mode t)
+;; Disable startup message
+(setq inhibit-startup-message t)
 
+
+;;;; Convenience and quality of life, random stuff in general
+;; Move current line one space up
+(defun move-line-up ()
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2))
+(global-set-key (kbd "M-<up>") 'move-line-up)
+(global-set-key (kbd "M-c") 'move-line-up)
+
+;; Move current line one space down
+(defun move-line-down ()
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1))
+(global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key (kbd "M-t") 'move-line-down)
+ 
+;; Navigation commands
+(global-set-key (kbd "C-r") 'previous-line)
+(global-set-key (kbd "C-t") 'next-line)
+(global-set-key (kbd "C-h") 'backward-char)
+(global-set-key (kbd "C-n") 'forward-char)
+
+;; Cycle through open "tiles"
+(defun swindow()
+  (interactive)
+  (other-window 1 t))
+;  (select-frame-set-input-focus (selected-frame))) For multiple displays
+(bind-key* "C-b" 'swindow)
 
 ;; Make emacs add matching parenthesis
 ;; enable skeleton-pair insert globally
@@ -141,7 +155,6 @@
    (global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
    (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
 
-
 ;; Automatically save and restore sessions
 (setq desktop-dirname             "~/.emacs.d/desktop/"
       desktop-base-file-name      "emacs.desktop"
@@ -152,7 +165,6 @@
       desktop-load-locked-desktop nil
       desktop-auto-save-timeout   30)
 (desktop-save-mode 1)
-
 
 ;; Restart emacs from within emacs
 (defun launch-separate-emacs-in-terminal ()
@@ -168,7 +180,7 @@
 				    #'launch-separate-emacs-in-terminal)))))
     (save-buffers-kill-emacs)))
 (global-set-key (kbd "C-q C-p") 'restart-emacs)
-
+(global-set-key (kbd "C-M-p") 'restart-emacs)
 
 ;; Unholy abomination which should display total line number
 (defvar my-mode-line-buffer-line-count nil)
@@ -186,11 +198,23 @@
                 (list 'column-number-mode "  C%c")
                 "  " mode-line-buffer-identification
                 "  " mode-line-modes))
-
 (defun my-mode-line-count-lines ()
   (setq my-mode-line-buffer-line-count (int-to-string (count-lines (point-min) (point-max)))))
-
 (add-hook 'find-file-hook 'my-mode-line-count-lines)
 (add-hook 'after-save-hook 'my-mode-line-count-lines)
 (add-hook 'after-revert-hook 'my-mode-line-count-lines)
 (add-hook 'dired-after-readin-hook 'my-mode-line-count-lines)
+
+;; Easier-access names
+(defun markred ()
+  (interactive)
+  (markerpen-mark-region 1))
+(defun markyellow ()
+  (interactive)
+  (markerpen-mark-region 3))
+(defun markblue ()
+  (interactive)
+  (markerpen-mark-region 4))
+(defun markgreen ()
+  (interactive)
+  (markerpen-mark-region 5))
