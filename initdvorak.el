@@ -22,6 +22,7 @@
 (package-initialize)
 
 ;; Install missing packages
+; Guess it doesn't work like I want it to?
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -40,6 +41,11 @@
   (package-refresh-contents)
   (package-install 'base16-theme))
 
+;; Automatically install swiper
+(unless (package-installed-p 'swiper)
+  (package-refresh-contents)
+  (package-install 'swiper))
+
 ;; Ivy does fancy shit
 (use-package ivy)
 (ivy-mode 1)
@@ -47,11 +53,14 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-o") 'swiper)
 
+;;; Manually included libraries
 ;; Directory for arbitrary libraries
 (add-to-list 'load-path "~/.emacs.d/libs")
 
 ;; Text highlighting
 (load-library "markerpen")
+;; Loadsa stringy stuff
+(load-library "s")
 
 
 ;;;; Various keybindings I think make sense
@@ -67,9 +76,7 @@
 
 (global-set-key (kbd "C-æ") 'undo)
 
-(global-set-key (kbd "M-p") 'delete-backward-char)
-
-(global-set-key (kbd "M-y") 'backward-kill-word)
+(global-set-key (kbd "C-|") 'delete-backward-char)
 
 (global-set-key (kbd "C-k") 'kill-line)
 
@@ -83,6 +90,8 @@
 (global-set-key (kbd "C-q C-u") 'find-file)
 
 (global-set-key (kbd "C-q C-j") 'save-buffers-kill-emacs)
+
+(global-set-key (kbd "M-q") 'execute-extended-command) ; == M-x
 
 
 ;;;; Visual stuff
@@ -113,7 +122,6 @@
   (forward-line -2))
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-c") 'move-line-up)
-
 ;; Move current line one space down
 (defun move-line-down ()
   (interactive)
@@ -122,13 +130,13 @@
   (forward-line -1))
 (global-set-key (kbd "M-<down>") 'move-line-down)
 (global-set-key (kbd "M-t") 'move-line-down)
- 
 ;; Navigation commands
 (global-set-key (kbd "C-r") 'previous-line)
 (global-set-key (kbd "C-t") 'next-line)
 (global-set-key (kbd "C-h") 'backward-char)
 (global-set-key (kbd "C-n") 'forward-char)
 
+;; Toggle comments on one or several lines
 (defun comment-or-uncomment-region-or-line ()
     "Comments or uncomments the region or the current line if there's no active region."
     (interactive)
@@ -145,7 +153,11 @@
   (interactive)
   (other-window 1 t))
 ;  (select-frame-set-input-focus (selected-frame))) For multiple displays
+(defun bswindow()
+  (interactive)
+  (other-window -1 t))
 (bind-key* "C-b" 'swindow)
+(bind-key* "C-m" 'bswindow)
 
 ;; Make emacs add matching parenthesis
 ;; enable skeleton-pair insert globally
@@ -213,7 +225,7 @@
 (add-hook 'after-revert-hook 'my-mode-line-count-lines)
 (add-hook 'dired-after-readin-hook 'my-mode-line-count-lines)
 
-;; Easier-access names
+;; Easier-access names for highlighting
 (defun markred ()
   (interactive)
   (markerpen-mark-region 1))
@@ -226,3 +238,39 @@
 (defun markgreen ()
   (interactive)
   (markerpen-mark-region 5))
+
+;; "Smart"/IntelliJ-style Ctrl-backspace
+(defun aborn/backward-kill-word ()
+  "Customize/Smart backward-kill-word."
+  (interactive)
+  (let* ((cp (point))
+         (backword)
+         (end)
+         (space-pos)
+         (backword-char (if (bobp)
+                            ""           ;; cursor in begin of buffer
+                          (buffer-substring cp (- cp 1)))))
+    (if (equal (length backword-char) (string-width backword-char))
+        (progn
+          (save-excursion
+            (setq backword (buffer-substring (point) (progn (forward-word -1) (point)))))
+          (setq ab/debug backword)
+          (save-excursion
+            (when (and backword          ;; when backword contains space
+                       (s-contains? " " backword))
+              (setq space-pos (ignore-errors (search-backward " ")))))
+          (save-excursion
+            (let* ((pos (ignore-errors (search-backward-regexp "\n")))
+                   (substr (when pos (buffer-substring pos cp))))
+              (when (or (and substr (s-blank? (s-trim substr)))
+                        (s-contains? "\n" backword))
+                (setq end pos))))
+          (if end
+              (kill-region cp end)
+            (if space-pos
+                (kill-region cp space-pos)
+              (backward-kill-word 1))))
+      (kill-region cp (- cp 1)))         ;; word is non-english word
+    ))
+(global-set-key  [C-backspace]
+            'aborn/backward-kill-word)
