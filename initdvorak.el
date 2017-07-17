@@ -64,6 +64,7 @@
 
 
 ;;;; Various keybindings I think make sense
+;;; Important note! C-m == enter/return
 ;; Set Ctrl+q == Ctrl+x, for Dvorak practicality
 (global-set-key (kbd "C-q") ctl-x-map) 
 
@@ -133,7 +134,7 @@
 ;; Navigation commands
 (global-set-key (kbd "C-r") 'previous-line)
 (global-set-key (kbd "C-t") 'next-line)
-(global-set-key (kbd "C-h") 'backward-char)
+;(global-set-key (kbd "C-h") 'backward-char)
 (global-set-key (kbd "C-n") 'forward-char)
 
 ;; Toggle comments on one or several lines
@@ -157,7 +158,7 @@
   (interactive)
   (other-window -1 t))
 (bind-key* "C-b" 'swindow)
-(bind-key* "C-m" 'bswindow)
+(bind-key* "C-w" 'bswindow)
 
 ;; Make emacs add matching parenthesis
 ;; enable skeleton-pair insert globally
