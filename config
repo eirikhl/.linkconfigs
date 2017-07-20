@@ -161,12 +161,10 @@ bindsym --release $mod+Shift+l exec i3lock -c 202020
 bindsym $mod+Shift+n exec setxkbmap no
 bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
 bindsym $mod+Ctrl+1 exec setxkbmap no -variant dvorak # Safety measure
-exec setxkbmap no -variant dvorak
-# Swap Caps Lock and Escape
-exec_always xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
-exec_always xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+exec_always setxkbmap no -variant dvorak
+
 
 # Things that all my computers should do
-# Currently includes NumLock, changing Caps Lock and git pull
+# Currently includes NumLock, changing Caps Lock and Escape, and git pull
 exec ~/.linkconfigs/always_do.sh
 exec restart

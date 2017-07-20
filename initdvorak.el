@@ -1,19 +1,3 @@
-;; Don't touch this
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-;; Also don't touch this
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
 ;;;; Package stuff
 ;; Melpa = package managing and stuff
 (require 'package)
@@ -103,16 +87,26 @@
 (global-hl-line-mode 1)
 (set-face-attribute hl-line-face nil :underline t)
 
-;; Disable toolbar
-(tool-bar-mode -1)
-;; Disable menubar
-(menu-bar-mode -1)
 ;; Disable scroll bar
 (scroll-bar-mode -1)
 ;; Display line numbers
 (global-linum-mode t)
 ;; Disable startup message
 (setq inhibit-startup-message t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(menu-bar-mode nil)
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 94 :width normal)))))
 
 
 ;;;; Convenience and quality of life, random stuff in general
@@ -157,8 +151,8 @@
 (defun bswindow()
   (interactive)
   (other-window -1 t))
-(bind-key* "C-b" 'swindow)
-(bind-key* "C-w" 'bswindow)
+(bind-key* "C-<tab>" 'swindow)
+(bind-key* "C-M-<tab>" 'bswindow)
 
 ;; Make emacs add matching parenthesis
 ;; enable skeleton-pair insert globally
