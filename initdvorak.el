@@ -37,6 +37,12 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-o") 'swiper)
 
+;; Allow unmarked use of region commands, e.g. copy single line
+(use-package whole-line-or-region
+  :ensure t
+  :defer t)
+(whole-line-or-region-mode 1)
+
 ;;; Manually included libraries
 ;; Directory for arbitrary libraries
 (add-to-list 'load-path "~/.emacs.d/libs")
@@ -55,9 +61,9 @@
 (global-set-key (kbd "M-å") 'previous-buffer)
 (global-set-key (kbd "M-.") 'next-buffer)
 
-(global-set-key (kbd "C-a") 'yank) ; paste
-(global-set-key (kbd "C-,") 'kill-ring-save) ; copy
-(global-set-key (kbd "M-,") 'kill-region) ; cut
+(global-set-key (kbd "C-a") 'whole-line-or-region-yank) ; paste
+(global-set-key (kbd "C-,") 'whole-line-or-region-kill-ring-save) ; copy
+(global-set-key (kbd "M-,") 'whole-line-or-region-kill-region) ; cut
 
 (global-set-key (kbd "C-æ") 'undo)
 
@@ -106,7 +112,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 94 :width normal)))))
+ '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 90 :width normal)))))
 
 
 ;;;; Convenience and quality of life, random stuff in general
@@ -172,7 +178,6 @@
 
 ;; Automatically save and restore sessions
 (setq desktop-dirname             "~/.emacs.d/desktop/"
-      desktop-base-file-name      "emacs.desktop"
       desktop-base-lock-name      "lock"
       desktop-path                (list desktop-dirname)
       desktop-save                t
@@ -269,3 +274,8 @@
     ))
 (global-set-key  [C-backspace]
             'aborn/backward-kill-word)
+
+;;;; Random stuff I guess?
+;; Make scrolling make sense
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
