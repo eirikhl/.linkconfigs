@@ -13,23 +13,19 @@
 (eval-when-compile
   (require 'use-package))
 (setq use-package-always-ensure t)
-
 ;; Auto-complete thingamajig
 (unless (package-installed-p 'auto-complete)
   (package-refresh-contents)
   (package-install 'auto-complete))
 (ac-config-default)
-
 ;; Automatically install base16
 (unless (package-installed-p 'base16-theme)
   (package-refresh-contents)
   (package-install 'base16-theme))
-
 ;; Automatically install swiper
 (unless (package-installed-p 'swiper)
   (package-refresh-contents)
   (package-install 'swiper))
-
 ;; Ivy does fancy shit
 (use-package ivy)
 (ivy-mode 1)
@@ -87,7 +83,8 @@
 
 ;;;; Visual stuff
 ;; Change default colour theme
-(load-theme 'base16-isotope t)
+; (base16-isotope t) is also nice
+(load-theme 'tango-dark)
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
 (global-hl-line-mode 1)
@@ -112,7 +109,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 90 :width normal)))))
+ '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 83 :width normal)))))
 
 
 ;;;; Convenience and quality of life, random stuff in general
@@ -177,12 +174,13 @@
    (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
 
 ;; Automatically save and restore sessions
+; Should be disabled when working on customisation!
 (setq desktop-dirname             "~/.emacs.d/desktop/"
-      desktop-base-lock-name      "lock"
-      desktop-path                (list desktop-dirname)
-      desktop-save                t
-      desktop-files-not-to-save   "^$" ;reload tramp paths
-      desktop-load-locked-desktop nil
+     desktop-base-lock-name      "lock"
+     desktop-path                (list desktop-dirname)
+     desktop-save                t
+     desktop-files-not-to-save   "^$" ;reload tramp paths
+     desktop-load-locked-desktop nil
       desktop-auto-save-timeout   30)
 (desktop-save-mode 1)
 

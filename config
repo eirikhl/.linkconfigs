@@ -155,7 +155,8 @@ bar {
 
 
 # Make lockscreen kinda pretty
-bindsym --release $mod+Shift+l exec i3lock -c 202020
+# bindsym --release $mod+Shift+l exec i3lock -c 202020
+bindsym --release $mod+Shift+l exec xscreensaver-command --lock
 
 # Keyboard stuff, changing to Dvorak as default
 bindsym $mod+Shift+n exec setxkbmap no
@@ -163,7 +164,7 @@ bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
 bindsym $mod+Ctrl+1 exec setxkbmap no -variant dvorak # Safety measure
 exec_always setxkbmap no -variant dvorak
 
-
+exec xscreensaver &
 # Things that all my computers should do
 # Currently includes NumLock, changing Caps Lock and Escape, and git pull
 exec ~/.linkconfigs/always_do.sh
