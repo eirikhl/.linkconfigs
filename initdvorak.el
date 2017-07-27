@@ -81,37 +81,6 @@
 (global-set-key (kbd "M-q") 'execute-extended-command) ; == M-x
 
 
-;;;; Visual stuff
-;; Change default colour theme
-; (base16-isotope t) is also nice
-(load-theme 'tango-dark)
-;; Change cursor and line highlighting
-(set-default 'cursor-type 'bar)
-(global-hl-line-mode 1)
-(set-face-attribute hl-line-face nil :underline t)
-
-;; Disable scroll bar
-(scroll-bar-mode -1)
-;; Display line numbers
-(global-linum-mode t)
-;; Disable startup message
-(setq inhibit-startup-message t)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(menu-bar-mode nil)
- '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 83 :width normal)))))
-
-
 ;;;; Convenience and quality of life, random stuff in general
 ;; Move current line one space up
 (defun move-line-up ()
@@ -277,3 +246,34 @@
 ;; Make scrolling make sense
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
+
+
+;;;; Visual stuff
+;; Change default colour theme
+; (base16-isotope t) is also nice
+(load-theme 'tango-dark)
+;; Change cursor and line highlighting
+(set-default 'cursor-type 'bar)
+(global-hl-line-mode 1)
+(set-face-attribute hl-line-face nil :underline t)
+
+;; Disable scroll bar
+(scroll-bar-mode -1)
+;; Display line numbers
+(global-linum-mode t)
+;; Disable startup message
+(setq inhibit-startup-message t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(menu-bar-mode nil)
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 83 :width normal)))))
