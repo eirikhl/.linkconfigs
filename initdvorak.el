@@ -80,6 +80,8 @@
 
 (global-set-key (kbd "M-q") 'execute-extended-command) ; == M-x
 
+(global-set-key (kbd "<escape> C-å") 'keyboard-escape-quit)
+
 
 ;;;; Convenience and quality of life, random stuff in general
 ;; Move current line one space up
