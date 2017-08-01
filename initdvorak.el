@@ -257,7 +257,6 @@
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
 (global-hl-line-mode 1)
-(set-face-attribute hl-line-face nil :underline t)
 
 ;; Disable scroll bar
 (scroll-bar-mode -1)
@@ -278,4 +277,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 83 :width normal)))))
+ '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 83 :width normal))))
+ '(hl-line ((t (:background "dim gray" :underline t)))))
