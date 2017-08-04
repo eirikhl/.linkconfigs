@@ -86,23 +86,6 @@
 
 (global-set-key (kbd "<escape> C-å") 'keyboard-escape-quit)
 
-;;; ECB
-;; activate and deactivate ecb
-(global-set-key (kbd "C-x C-w") 'ecb-activate)
-(global-set-key (kbd "C-x C-v") 'ecb-deactivate)
-;; show/hide ecb window
-(global-set-key (kbd "M-w") 'ecb-show-ecb-windows)
-(global-set-key (kbd "M-v") 'ecb-hide-ecb-windows)
-;; quick navigation between ecb windows
-(global-set-key (kbd "C-§") 'ecb-goto-window-edit1)
-(global-set-key (kbd "C-!") 'ecb-goto-window-directories)
-(global-set-key (kbd "C-\"") 'ecb-goto-window-sources)
-(global-set-key (kbd "C-#") 'ecb-goto-window-methods)
-(global-set-key (kbd "C-¤") 'ecb-goto-window-compilation)
-
-(global-set-key (kbd "C-M-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
-
 
 ;;;; Convenience and quality of life, random stuff in general
 ;; Move current line one space up
@@ -151,19 +134,19 @@
 
 ;; Make emacs add matching parenthesis
 ;; enable skeleton-pair insert globally
-(setq skeleton-pair t)
-;;(setq skeleton-pair-on-word t)
-;; Uncomment if curly braces won't close in .R files
-;; https://github.com/emacs-ess/ESS/issues/296#issuecomment-189614821
-;;(define-key ess-mode-map (kbd "{") nil)
-;;(define-key ess-mode-map (kbd "}") nil) 
-(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
+   (setq skeleton-pair t)
+  ;;(setq skeleton-pair-on-word t)
+  ;; Uncomment if curly braces won't close in .R files
+  ;; https://github.com/emacs-ess/ESS/issues/296#issuecomment-189614821
+  ;;(define-key ess-mode-map (kbd "{") nil)
+  ;;(define-key ess-mode-map (kbd "}") nil) 
+   (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
+   (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
 
 ;; Automatically save and restore sessions
 ; Should be disabled when working on customisation!
@@ -289,17 +272,26 @@
 ;;; Setup for code browser
 (setq ecb-layout-name "left3")
 (setq ecb-show-sources-in-directories-buffer 'always)
-(setq ecb-compile-window-height 8)
-(defun reset-btm-region ()
-  (setq ecb-compile-window-height 8))
-(global-set-key (kbd "<escape> C-ø") 'reset-btm-region)
+(setq ecb-compile-window-height 12)
+
+;; activate and deactivate ecb
+(global-set-key (kbd "C-x C-w") 'ecb-activate)
+(global-set-key (kbd "C-x C-v") 'ecb-deactivate)
+;; show/hide ecb window
+(global-set-key (kbd "M-w") 'ecb-show-ecb-windows)
+(global-set-key (kbd "M-v") 'ecb-hide-ecb-windows)
+;; quick navigation between ecb windows
+(global-set-key (kbd "C-§") 'ecb-goto-window-edit1)
+(global-set-key (kbd "C-!") 'ecb-goto-window-directories)
+(global-set-key (kbd "C-@") 'ecb-goto-window-sources)
+(global-set-key (kbd "C-#") 'ecb-goto-window-methods)
+(global-set-key (kbd "C-¤") 'ecb-goto-window-compilation)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.50")
  '(menu-bar-mode nil)
  '(tool-bar-mode nil))
 (custom-set-faces
