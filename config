@@ -188,8 +188,7 @@ bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
 bindsym $mod+Ctrl+1 exec setxkbmap no -variant dvorak # Safety measure
 exec_always setxkbmap no -variant dvorak
 
-exec xscreensaver &
 # Things that all my computers should do
-# Currently includes NumLock, changing Caps Lock and Escape, and git pull
+# Currently includes NumLock, changing Caps Lock and Escape, xscreensaver and git pull
 exec ~/.linkconfigs/always_do.sh
 exec restart
