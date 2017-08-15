@@ -110,7 +110,7 @@ bindsym $mod+KP_6 workspace 6
 bindsym $mod+KP_7 workspace 7
 bindsym $mod+KP_8 workspace 8
 bindsym $mod+KP_9 workspace 9
-bindsym $mod+KP_0 workspace 0
+bindsym $mod+KP_0 workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -133,7 +133,7 @@ bindcode $mod+Shift+85 move container to workspace 6
 bindcode $mod+Shift+79 move container to workspace 7
 bindcode $mod+Shift+80 move container to workspace 8
 bindcode $mod+Shift+81 move container to workspace 9
-bindcode $mod+Shift+90 move container to workspace 0
+bindcode $mod+Shift+90 move container to workspace 10
 # Codes discovered using:
 # xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
 
@@ -186,9 +186,8 @@ bindsym --release $mod+Shift+l exec xscreensaver-command --lock
 bindsym $mod+Shift+n exec setxkbmap no
 bindsym $mod+Shift+d exec setxkbmap no -variant dvorak
 bindsym $mod+Ctrl+1 exec setxkbmap no -variant dvorak # Safety measure
-exec_always setxkbmap no -variant dvorak
 
 # Things that all my computers should do
-# Currently includes NumLock, changing Caps Lock and Escape, xscreensaver and git pull
+# Currently includes Dvorak, NumLock, changing Caps Lock and Escape, xscreensaver and git pull
 exec ~/.linkconfigs/always_do.sh
 exec restart
