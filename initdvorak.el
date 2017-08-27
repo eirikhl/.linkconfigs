@@ -1,9 +1,17 @@
+;;;; Debug
+(setq debug-on-error t)
+(setq debug-on-quit t)
+
 ;;;; Package stuff
 ;; Melpa = package managing and stuff
-(require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
+(require 'package)
+(setq
+ package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                    ("org" . "http://orgmode.org/elpa/")
+                    ("melpa" . "http://melpa.org/packages/")
+                    ("melpa-stable" . "http://stable.melpa.org/packages/"))
+ package-archive-priorities '(("melpa-stable" . 1)))
 
 ;; Install missing packages
 ; Guess it doesn't work like I want it to?
@@ -32,7 +40,10 @@
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-o") 'swiper)
-
+;; Scala stuff
+(use-package ensime
+ :ensure t
+ :pin melpa-stable)
 ;; Allow unmarked use of region commands, e.g. copy single line
 (use-package whole-line-or-region
   :ensure t
