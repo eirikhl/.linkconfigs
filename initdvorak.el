@@ -51,7 +51,7 @@
 (whole-line-or-region-mode 1)
 
 ;; Emacs Code Browser, basically OP shit
-(require 'ecb)
+;(require 'ecb)
 ;(require 'ecb-autoloads) I want this...
 
 ;;; Manually included libraries
@@ -99,17 +99,17 @@
 
 ;;; ECB
 ;; activate and deactivate ecb
-(global-set-key (kbd "C-x C-w") 'ecb-activate)
-(global-set-key (kbd "C-x C-v") 'ecb-deactivate)
+;(global-set-key (kbd "C-x C-w") 'ecb-activate)
+;(global-set-key (kbd "C-x C-v") 'ecb-deactivate)
 ;; show/hide ecb window
-(global-set-key (kbd "M-w") 'ecb-show-ecb-windows)
-(global-set-key (kbd "M-v") 'ecb-hide-ecb-windows)
+;(global-set-key (kbd "M-w") 'ecb-show-ecb-windows)
+;(global-set-key (kbd "M-v") 'ecb-hide-ecb-windows)
 ;; quick navigation between ecb windows
-(global-set-key (kbd "C-§") 'ecb-goto-window-edit1)
-(global-set-key (kbd "C-!") 'ecb-goto-window-directories)
-(global-set-key (kbd "C-\"") 'ecb-goto-window-sources)
-(global-set-key (kbd "C-#") 'ecb-goto-window-methods)
-(global-set-key (kbd "C-¤") 'ecb-goto-window-compilation)
+;(global-set-key (kbd "C-§") 'ecb-goto-window-edit1)
+;(global-set-key (kbd "C-!") 'ecb-goto-window-directories)
+;(global-set-key (kbd "C-\"") 'ecb-goto-window-sources)
+;(global-set-key (kbd "C-#") 'ecb-goto-window-methods)
+;(global-set-key (kbd "C-¤") 'ecb-goto-window-compilation)
 
 (global-set-key (kbd "C-M-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
