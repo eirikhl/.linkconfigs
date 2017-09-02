@@ -122,6 +122,7 @@ fi
 
 LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH 
 export LIBRARY_PATH
+export PATH="/home/$USER/bin:$PATH"
 
 alias cc='cd ..'
 alias vim='emacs'
