@@ -116,6 +116,13 @@
 
 
 ;;;; Convenience and quality of life, random stuff in general
+;; Smooth scrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq scroll-margin 7)
+
 ;; Move current line one space up
 (defun move-line-up ()
   (interactive)
