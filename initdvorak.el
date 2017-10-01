@@ -165,7 +165,7 @@
   (interactive)
   (other-window -1 t))
 (bind-key* "C-<tab>" 'swindow)
-(bind-key* "C-M-<tab>" 'bswindow)
+(bind-key* "C-<iso-lefttab>" 'bswindow)
 
 ;; Make emacs add matching parenthesis
 ;; enable skeleton-pair insert globally
