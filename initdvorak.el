@@ -292,7 +292,7 @@
 ;;;; Visual stuff
 ;; Change default colour theme
 ; (base16-isotope t) is also nice
-;; (load-theme 'tango-dark)
+(load-theme 'tango-dark)
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
 (global-hl-line-mode 1)
