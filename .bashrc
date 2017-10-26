@@ -128,6 +128,7 @@ alias cc='cd ..'
 alias vim='emacs'
 alias rf='rm -rf'
 alias gitll='git log --graph --oneline --decorate --all'
+eval $(thefuck --alias)
 
 test -s /arm/tools/setup/init/bash && . /arm/tools/setup/init/bash
 export DEPOT_EMULATED_PLATFORM=rhe5-amd64
