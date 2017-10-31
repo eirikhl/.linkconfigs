@@ -41,9 +41,9 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-o") 'swiper)
 ;; Scala stuff
-(use-package ensime
- :ensure t
- :pin melpa-stable)
+;; (use-package ensime
+;;  :ensure t
+;;  :pin melpa-stable)
 ;; Allow unmarked use of region commands, e.g. copy single line
 (use-package whole-line-or-region
   :ensure t
@@ -96,6 +96,8 @@
 (global-set-key (kbd "M-q") 'execute-extended-command) ; == M-x
 
 (global-set-key (kbd "<escape> C-å") 'keyboard-escape-quit)
+
+(global-set-key (kbd "C-M-s") 'magit-status)
 
 ;;; ECB
 ;; activate and deactivate ecb
@@ -283,6 +285,23 @@
 (global-set-key  [C-backspace]
             'aborn/backward-kill-word)
 
+;; C++-mode indentation
+(defun my-c-mode-common-hook ()
+  ;; my customizations for all of c-mode, c++-mode, objc-mode, java-mode
+  (c-set-offset 'substatement-open 0)
+  ;; other customizations can go here
+  
+  (setq c++-tab-always-indent t)
+  (setq c-basic-offset 4)                  ;; Default is 2
+  (setq c-indent-level 4)                  ;; Default is 2
+  
+  (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
+  (setq tab-width 4)
+  (setq indent-tabs-mode t)  ; use spaces only if nil
+  )
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+
 ;;;; Random stuff I guess?
 ;; Make scrolling make sense
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
@@ -292,10 +311,11 @@
 ;;;; Visual stuff
 ;; Change default colour theme
 ; (base16-isotope t) is also nice
-(load-theme 'tango-dark)
+;; (load-theme 'tango-dark)
+(load-theme 'base16-railscasts)
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
 
 ;; Disable scroll bar
 (scroll-bar-mode -1)
@@ -317,6 +337,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#f5f7ff" "#c94922" "#ac9739" "#c08b30" "#3d8fd1" "#6679cc" "#3d8fd1" "#5e6687"])
+ '(ansi-term-color-vector
+   [unspecified "#f5f7ff" "#c94922" "#ac9739" "#c08b30" "#3d8fd1" "#6679cc" "#3d8fd1" "#5e6687"])
+ '(custom-safe-themes
+   (quote
+    ("eae831de756bb480240479794e85f1da0789c6f2f7746e5cc999370bbc8d9c8a" "04790c9929eacf32d508b84d34e80ad2ee233f13f17767190531b8b350b9ef22" default)))
  '(ecb-options-version "2.50")
  '(menu-bar-mode nil)
  '(tool-bar-mode nil))
