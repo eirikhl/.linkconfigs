@@ -41,9 +41,9 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-o") 'swiper)
 ;; Scala stuff
-;; (use-package ensime
-;;  :ensure t
-;;  :pin melpa-stable)
+(use-package ensime
+ :ensure t
+ :pin melpa-stable)
 ;; Allow unmarked use of region commands, e.g. copy single line
 (use-package whole-line-or-region
   :ensure t
@@ -312,7 +312,21 @@
 ;; Change default colour theme
 ; (base16-isotope t) is also nice
 ;; (load-theme 'tango-dark)
-(load-theme 'base16-railscasts)
+;; (load-theme 'base16-railscasts)
+(use-package spacemacs-theme
+  :ensure t
+  :init
+  (load-theme 'spacemacs-dark t)
+  (setq spacemacs-theme-org-agenda-height nil)
+  (setq spacemacs-theme-org-height nil))
+
+(use-package spaceline
+  :demand t
+  :init
+  (setq powerline-default-separator 'arrow-fade)
+  :config
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme))
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
 ;; (global-hl-line-mode 1)

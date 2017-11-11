@@ -57,7 +57,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 function color_my_prompt {
-    local __user_and_host="\[\033[0;32m\]\u\[\033[00m\]@\[\033[36m\]\h"
+    # Commented out to remove "eirik@Minisnopp"
+    # local __user_and_host="\[\033[0;32m\]\u\[\033[00m\]@\[\033[36m\]\h"
     local __cur_location="\[\033[01;36m\]\w"
     local __git_branch_color="\[\033[31m\]"
     local __git_branch='`git branch 2> /dev/null | grep ^* | sed -E s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
@@ -71,6 +72,7 @@ color_my_prompt
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    # PS1="\[\e]0;\h: \w\a\]$PS1"
     ;;
 *)
     ;;
