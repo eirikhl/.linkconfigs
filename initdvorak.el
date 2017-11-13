@@ -313,6 +313,7 @@
 ; (base16-isotope t) is also nice
 ;; (load-theme 'tango-dark)
 ;; (load-theme 'base16-railscasts)
+;; (load-theme 'adwaita)
 (use-package spacemacs-theme
   :ensure t
   :init
@@ -328,8 +329,17 @@
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
 ;; Change cursor and line highlighting
-(set-default 'cursor-type 'bar)
+;; (set-default 'cursor-type 'bar)
 ;; (global-hl-line-mode 1)
+
+;; Highlight parentheses
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+;; Highlight numbers and function calls
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
+(add-hook 'prog-mode-hook 'highlight-function-calls-mode)
+
 
 ;; Disable scroll bar
 (scroll-bar-mode -1)
@@ -351,13 +361,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#f5f7ff" "#c94922" "#ac9739" "#c08b30" "#3d8fd1" "#6679cc" "#3d8fd1" "#5e6687"])
  '(ansi-term-color-vector
    [unspecified "#f5f7ff" "#c94922" "#ac9739" "#c08b30" "#3d8fd1" "#6679cc" "#3d8fd1" "#5e6687"])
  '(custom-safe-themes
    (quote
-    ("eae831de756bb480240479794e85f1da0789c6f2f7746e5cc999370bbc8d9c8a" "04790c9929eacf32d508b84d34e80ad2ee233f13f17767190531b8b350b9ef22" default)))
+    ("a85e40c7d2df4a5e993742929dfd903899b66a667547f740872797198778d7b5" "8be07a2c1b3a7300860c7a65c0ad148be6d127671be04d3d2120f1ac541ac103" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "eae831de756bb480240479794e85f1da0789c6f2f7746e5cc999370bbc8d9c8a" "04790c9929eacf32d508b84d34e80ad2ee233f13f17767190531b8b350b9ef22" default)))
  '(ecb-options-version "2.50")
  '(menu-bar-mode nil)
  '(tool-bar-mode nil))
