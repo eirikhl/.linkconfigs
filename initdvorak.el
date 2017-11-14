@@ -310,10 +310,12 @@
 
 ;;;; Visual stuff
 ;; Change default colour theme
-; (base16-isotope t) is also nice
-;; (load-theme 'tango-dark)
-;; (load-theme 'base16-railscasts)
-;; (load-theme 'adwaita)
+;; Different ones I think look kinda nice
+; (load-theme 'base16-isotope t)
+; (load-theme 'tango-dark)
+; (load-theme 'base16-railscasts)
+; (load-theme 'adwaita)
+
 (use-package spacemacs-theme
   :ensure t
   :init
@@ -328,6 +330,7 @@
   :config
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
+
 ;; Change cursor and line highlighting
 (set-default 'cursor-type 'bar)
 ;; (global-hl-line-mode 1)
@@ -348,14 +351,6 @@
 ;; Disable startup message
 (setq inhibit-startup-message t)
 
-;;; Setup for code browser
-(setq ecb-layout-name "left3")
-(setq ecb-show-sources-in-directories-buffer 'always)
-(setq ecb-compile-window-height 8)
-(defun reset-btm-region ()
-  (setq ecb-compile-window-height 8))
-(global-set-key (kbd "<escape> C-ø") 'reset-btm-region)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -370,7 +365,6 @@
  '(custom-safe-themes
    (quote
     ("a85e40c7d2df4a5e993742929dfd903899b66a667547f740872797198778d7b5" "8be07a2c1b3a7300860c7a65c0ad148be6d127671be04d3d2120f1ac541ac103" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "eae831de756bb480240479794e85f1da0789c6f2f7746e5cc999370bbc8d9c8a" "04790c9929eacf32d508b84d34e80ad2ee233f13f17767190531b8b350b9ef22" default)))
- '(ecb-options-version "2.50")
  '(menu-bar-mode nil)
  '(tool-bar-mode nil))
 (custom-set-faces
