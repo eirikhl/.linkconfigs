@@ -329,7 +329,7 @@
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
 ;; Change cursor and line highlighting
-;; (set-default 'cursor-type 'bar)
+(set-default 'cursor-type 'bar)
 ;; (global-hl-line-mode 1)
 
 ;; Highlight parentheses
