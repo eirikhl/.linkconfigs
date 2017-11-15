@@ -66,55 +66,40 @@
 
 ;;;; Various keybindings I think make sense
 ;;; Important note! C-m == enter/return
-;; Set Ctrl+q == Ctrl+x, for Dvorak practicality
-(global-set-key (kbd "C-q") ctl-x-map) 
+;; Macro to set a list of keybindings and functions
+(defmacro gsk (l)
+  `(progn ,@(mapcar (lambda (l)
+		      `(global-set-key
+			(kbd ,(car l)) ,(cadr l))) l)))
 
-(global-set-key (kbd "M-å") 'previous-buffer)
-(global-set-key (kbd "M-.") 'next-buffer)
-
-(global-set-key (kbd "C-a") 'whole-line-or-region-yank) ; paste
-(global-set-key (kbd "C-,") 'whole-line-or-region-kill-ring-save) ; copy
-(global-set-key (kbd "M-,") 'whole-line-or-region-kill-region) ; cut
-
-(global-set-key (kbd "C-æ") 'undo)
-
-(global-set-key (kbd "C-|") 'delete-backward-char)
-
-(global-set-key (kbd "C-k") 'kill-line)
-
-(global-set-key (kbd "C-q q") 'kill-buffer)
-
-(global-set-key (kbd "M-o") 'goto-line)
-
-(global-set-key (kbd "C-q C-.") 'eval-region)
-
-(global-set-key (kbd "C-q C-o") 'save-buffer)
-(global-set-key (kbd "C-q C-u") 'find-file)
-
-(global-set-key (kbd "C-q C-j") 'save-buffers-kill-emacs)
-
-(global-set-key (kbd "M-q") 'execute-extended-command) ; == M-x
-
-(global-set-key (kbd "<escape> C-å") 'keyboard-escape-quit)
-
-(global-set-key (kbd "C-M-s") 'magit-status)
-
-;;; ECB
-;; activate and deactivate ecb
-;(global-set-key (kbd "C-x C-w") 'ecb-activate)
-;(global-set-key (kbd "C-x C-v") 'ecb-deactivate)
-;; show/hide ecb window
-;(global-set-key (kbd "M-w") 'ecb-show-ecb-windows)
-;(global-set-key (kbd "M-v") 'ecb-hide-ecb-windows)
-;; quick navigation between ecb windows
-;(global-set-key (kbd "C-§") 'ecb-goto-window-edit1)
-;(global-set-key (kbd "C-!") 'ecb-goto-window-directories)
-;(global-set-key (kbd "C-\"") 'ecb-goto-window-sources)
-;(global-set-key (kbd "C-#") 'ecb-goto-window-methods)
-;(global-set-key (kbd "C-¤") 'ecb-goto-window-compilation)
-
-(global-set-key (kbd "C-M-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
+;; Using said macro
+(gsk (("C-q" ctl-x-map) ; map C-q to C-x
+      ("M-å" 'previous-buffer)
+      ("M-." 'next-buffer)
+      ("C-a" 'whole-line-or-region-yank) ; paste
+      ("C-," 'whole-line-or-region-kill-ring-save) ; copy
+      ("M-," 'whole-line-or-region-kill-region) ; cut
+      ("C-æ" 'undo)
+      ("C-|" 'delete-backward-char)
+      ("C-k" 'kill-line)
+      ("C-q q" 'kill-buffer)
+      ("M-o" 'goto-line)
+      ("C-q C-." 'eval-region)
+      ("C-q C-o" 'save-buffer)
+      ("C-q C-u" 'find-file)
+      ("C-q C-j" 'save-buffers-kill-emacs) ; exit emacs
+      ("M-q" 'execute-extended-command) ; map M-q to M-x
+      ("<escape> C-å" 'keyboard-escape-quit)
+      ("C-M-s" 'magit-status)
+      ("C-h" 'previous-line)
+      ("C-t" 'next-line)
+      ("C-n" 'backward-char)
+      ("C-s" 'forward-char)
+      ("C-v" 'move-beginning-of-line)
+      ("C-z" 'move-end-of-line)
+      ("C-M-<left>" 'shrink-window-horizontally)
+      ("C-M-<right>" 'enlarge-window-horizontally)
+      ))
 
 
 ;;;; Convenience and quality of life, random stuff in general
@@ -131,7 +116,7 @@
   (transpose-lines 1)
   (forward-line -2))
 (global-set-key (kbd "M-<up>") 'move-line-up)
-(global-set-key (kbd "M-c") 'move-line-up)
+(global-set-key (kbd "M-h") 'move-line-up)
 ;; Move current line one space down
 (defun move-line-down ()
   (interactive)
@@ -140,11 +125,6 @@
   (forward-line -1))
 (global-set-key (kbd "M-<down>") 'move-line-down)
 (global-set-key (kbd "M-t") 'move-line-down)
-;; Navigation commands
-(global-set-key (kbd "C-r") 'previous-line)
-(global-set-key (kbd "C-t") 'next-line)
-;(global-set-key (kbd "C-h") 'backward-char)
-(global-set-key (kbd "C-n") 'forward-char)
 
 ;; Toggle comments on one or several lines
 (defun comment-or-uncomment-region-or-line ()
