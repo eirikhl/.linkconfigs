@@ -1,0 +1,4 @@
+alias .. cd ..
+alias l ls $1
+alias ll ls -la $1
+alias la ls -a $1
