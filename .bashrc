@@ -127,9 +127,12 @@ export LIBRARY_PATH
 export PATH="/home/$USER/bin:$PATH"
 
 alias ..='cd ..'
+alias ...='cd ../..'
 alias vim='emacs'
 alias rf='rm -rf'
 alias gitll='git log --graph --oneline --decorate --all'
+alias gits='git status'
+
 eval $(thefuck --alias)
 
 test -s /arm/tools/setup/init/bash && . /arm/tools/setup/init/bash
