@@ -297,8 +297,8 @@
 (setq show-paren-delay 0)
 
 ;; Highlight numbers and function calls
-(add-hook 'prog-mode-hook 'highlight-numbers-mode)
-(add-hook 'prog-mode-hook 'highlight-function-calls-mode)
+;; (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+;; (add-hook 'prog-mode-hook 'highlight-function-calls-mode)
 
 
 ;; Disable scroll bar
