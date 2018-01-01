@@ -85,7 +85,9 @@
       ("C-h" 'previous-line)
       ("C-t" 'next-line)
       ("C-n" 'backward-char)
+      ("C-M-n" 'backward-word)
       ("C-s" 'forward-char)
+      ("C-M-s" 'forward-word)
       ("C-v" 'move-beginning-of-line)
       ("C-z" 'move-end-of-line)
       ("C-M-<left>" 'shrink-window-horizontally)
@@ -94,6 +96,19 @@
 
 
 ;;;; Convenience and quality of life, random stuff in general
+;; Spell-checking
+(setq ispell-program-name "aspell") ; could be ispell as well, depending on your preferences
+(setq ispell-dictionary "english") ; this can obviously be set to any language your spell-checking program supports
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-buffer)
+
+;; Collapse parts of the text
+(defun turn-on-outline-minor-mode ()
+(outline-minor-mode 1))
+(add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
+(add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
+(setq outline-minor-mode-prefix "\C-c \C-g") ; Or something else
+
 ;; Smooth scrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
