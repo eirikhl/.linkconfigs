@@ -10,6 +10,9 @@ xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 # Activate NumLock
 numlockx on
 
+# Start Dropbox, because I always forget to
+exec dropbox start
+
 # Pull the dotfiles repo
 cd ~/.linkconfigs && git pull --rebase
 
