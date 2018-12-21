@@ -132,6 +132,7 @@ alias vim='emacs'
 alias rf='rm -rf'
 alias gitll='git log --graph --oneline --decorate --all'
 alias gits='git status'
+alias gita='git add -A'
 
 eval $(thefuck --alias)
 
