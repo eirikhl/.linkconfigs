@@ -143,3 +143,9 @@ export DEPOT_EMULATED_PLATFORM=rhe5-amd64
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# Swap two filenames
+function swap() { mv $1 $1._tmp && mv $2 $1 && mv $1._tmp $2; }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
