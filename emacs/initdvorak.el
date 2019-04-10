@@ -54,6 +54,49 @@
 ;; Loadsa stringy stuff
 (load-library "s")
 
+;;; EMMS - The Emacs Multi-Media System
+;; Standard setup
+(add-to-list 'load-path "~/elisp/emms/lisp/")
+(require 'emms-setup)
+(emms-devel)
+;; (emms-default-players)
+(setq emms-source-file-default-directory "~/music/")
+;; Magic from a mailing list
+; https://www.mail-archive.com/emms-help@gnu.org/msg00482.html
+(define-emms-simple-player mplayer-mp3 '(file url)
+ "\\.[mM][pP][23]$" "mplayer")
+(define-emms-simple-player mplayer-ogg '(file)
+ (regexp-opt '(".ogg" ".OGG" ".FLAC" ".flac" )) "mplayer")
+(define-emms-simple-player mplayer-playlist '(streamlist)
+ "http://" "mplayer" "-playlist")
+(define-emms-simple-player mplayer-list '(file url)
+ (regexp-opt '(".m3u" ".pls")) "mplayer" "-playlist")
+(define-emms-simple-player mplayer-video '(file url)
+ (regexp-opt '(".ogg" ".mp3" ".wav" ".mpg" ".mpeg" ".wmv"
+               ".wma" ".mov" ".avi" ".divx" ".ogm" ".asf"
+               ".mkv" "http://")) "mplayer")
+(setq emms-player-list '(emms-player-mplayer-mp3
+                        emms-player-mplayer-ogg
+                        emms-player-mplayer-playlist
+                        emms-player-mplayer-video
+                        emms-player-mplayer-list
+                        ))
+(setq emms-playlist-buffer-name "*EMMS*")
+(setq emms-info-asynchronously t)
+(setq emms-stream-default-action "play")
+(defun emms-add-universe-synchronously ()
+ (interactive)
+ (let ((emms-info-asynchronously nil))
+   (emms-add-directory-tree emms-source-file-default-directory)
+    (message "Thud!")))
+
+;; (require 'emms-player-simple)
+;; (require 'emms-source-file)
+;; (require 'emms-source-playlist)
+;; (setq emms-player-list '(emms-player-mpg321
+                         ;; emms-player-ogg123
+                         ;; emms-player-mplayer))
+
 
 ;;;; Various keybindings I think make sense
 ;;; Important note! C-m == enter/return
@@ -94,6 +137,9 @@
       ("C-M-<right>" 'enlarge-window-horizontally)
       ))
 
+;; Fix js-mode fucking up my keybindings
+(eval-after-load 'js
+  '(define-key js-mode-map (kbd "M-.") 'next-buffer))
 
 ;;;; Convenience and quality of life, random stuff in general
 ;; Spell-checking
