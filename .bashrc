@@ -135,6 +135,11 @@ alias gits='git status'
 alias gita='git add -A'
 alias gitc='git commit -m "generic commit message"'
 alias gitp='git push'
+alias aptd='sudo apt-get update'
+alias aptg='sudo apt-get upgrade -y'
+alias aptc='sudo apt-get autoclean'
+alias aptr='sudo apt-get autoremove -y'
+
 
 eval $(thefuck --alias)
 
@@ -142,6 +147,8 @@ test -s /arm/tools/setup/init/bash && . /arm/tools/setup/init/bash
 export DEPOT_EMULATED_PLATFORM=rhe5-amd64
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH="/home/eirik/blockchain/fabric-samples/bin:$PATH"
+export PATH="/home/eirik/sunvox/sunvox/linux_x86_64:$PATH"
 
 # Swap two filenames
 function swap() { mv $1 $1._tmp && mv $2 $1 && mv $1._tmp $2; }

@@ -4,7 +4,12 @@
 
 ;;;; Package stuff
 ;; Melpa = package managing and stuff
-(package-initialize)
+(package-initialize nil)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;(unless (assoc-default "melpa" package-archives)
+;  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;  (package-refresh-contents))
 (require 'package)
 (setq
  package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -18,6 +23,7 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(setq use-package-verbose t)
 (eval-when-compile
   (require 'use-package))
 (setq use-package-always-ensure t)
@@ -55,47 +61,67 @@
 (load-library "s")
 
 ;;; EMMS - The Emacs Multi-Media System
-;; Standard setup
-(add-to-list 'load-path "~/elisp/emms/lisp/")
-(require 'emms-setup)
-(emms-devel)
-;; (emms-default-players)
-(setq emms-source-file-default-directory "~/music/")
-;; Magic from a mailing list
 ; https://www.mail-archive.com/emms-help@gnu.org/msg00482.html
-(define-emms-simple-player mplayer-mp3 '(file url)
- "\\.[mM][pP][23]$" "mplayer")
-(define-emms-simple-player mplayer-ogg '(file)
- (regexp-opt '(".ogg" ".OGG" ".FLAC" ".flac" )) "mplayer")
-(define-emms-simple-player mplayer-playlist '(streamlist)
- "http://" "mplayer" "-playlist")
-(define-emms-simple-player mplayer-list '(file url)
- (regexp-opt '(".m3u" ".pls")) "mplayer" "-playlist")
-(define-emms-simple-player mplayer-video '(file url)
- (regexp-opt '(".ogg" ".mp3" ".wav" ".mpg" ".mpeg" ".wmv"
-               ".wma" ".mov" ".avi" ".divx" ".ogm" ".asf"
-               ".mkv" "http://")) "mplayer")
-(setq emms-player-list '(emms-player-mplayer-mp3
-                        emms-player-mplayer-ogg
-                        emms-player-mplayer-playlist
-                        emms-player-mplayer-video
-                        emms-player-mplayer-list
-                        ))
-(setq emms-playlist-buffer-name "*EMMS*")
-(setq emms-info-asynchronously t)
-(setq emms-stream-default-action "play")
-(defun emms-add-universe-synchronously ()
- (interactive)
- (let ((emms-info-asynchronously nil))
-   (emms-add-directory-tree emms-source-file-default-directory)
-    (message "Thud!")))
+;; (setq exec-path (append exec-path '("/usr/bin")))
+(add-to-list 'load-path "~/elisp/emms/lisp")
 
-;; (require 'emms-player-simple)
-;; (require 'emms-source-file)
-;; (require 'emms-source-playlist)
-;; (setq emms-player-list '(emms-player-mpg321
-                         ;; emms-player-ogg123
-                         ;; emms-player-mplayer))
+;; (require 'emms-setup)
+;; (emms-devel)
+
+
+;; (require 'emms-player-mplayer)
+;; (setq emms-source-file-default-directory "~/music/")
+;; (emms-standard)
+;; (emms-default-players)
+;; (define-emms-simple-player mplayer '(file url)
+;;       (regexp-opt '(".ogg" ".mp3" ".wav" ".mpg" ".mpeg" ".wmv" ".wma"
+;;                     ".mov" ".avi" ".divx" ".ogm" ".asf" ".mkv" "http://" "mms://"
+;;                     ".rm" ".rmvb" ".mp4" ".flac" ".vob" ".m4a" ".flv" ".ogv" ".pls"))
+;;       "mplayer" "-slave" "-quiet" "-really-quiet" "-fullscreen")
+
+(setq exec-path (append exec-path '("/usr/bin")))
+;; (require 'emms-setup)
+;; (require 'emms-player-mplayer)      ; load mplayer
+;; (emms-all)
+;; (emms-default-players)
+;; (setq emms-source-file-default-directory "~/music")
+;; (emms-add-directory-tree emms-source-file-default-directory)
+
+;; (define-emms-simple-player mplayer-mp3 '(file url)
+;;   "\\.[mM][pP][23]$" "mplayer")
+
+;; (define-emms-simple-player mplayer-ogg '(file)
+;;   (regexp-opt '(".ogg" ".OGG" ".FLAC" ".flac" )) "mplayer")
+
+;; (define-emms-simple-player mplayer-playlist '(streamlist)
+;;   "http://" "mplayer" "-playlist")
+
+;; (define-emms-simple-player mplayer-list '(file url)
+;;   (regexp-opt '(".m3u" ".pls")) "mplayer" "-playlist")
+
+;; (define-emms-simple-player mplayer-video '(file url)
+;;   (regexp-opt '(".ogg" ".mp3" ".wav" ".mpg" ".mpeg" ".wmv"
+;;                 ".wma" ".mov" ".avi" ".divx" ".ogm" ".asf"
+;;                 ".mkv" "http://")) "mplayer")
+
+;; (setq emms-player-list '(emms-player-mplayer-mp3
+;;                          emms-player-mplayer-ogg
+;;                          emms-player-mplayer-playlist
+;;                          emms-player-mplayer-video
+;;                          emms-player-mplayer-list
+;;                          ))
+
+;; (setq emms-playlist-buffer-name "*EMMS*")
+
+;; (setq emms-info-asynchronously t)
+
+;; (setq emms-stream-default-action "play")
+
+;; (defun emms-add-universe-synchronously ()
+;;   (interactive)
+;;   (let ((emms-info-asynchronously nil))
+;;     (emms-add-directory-tree emms-source-file-default-directory)
+;;      (message "Thud!")))
 
 
 ;;;; Various keybindings I think make sense
@@ -215,7 +241,7 @@
 (global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
 ;; (global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
+;; (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
 
 ;; Automatically save and restore sessions
 ; Should be disabled when working on customisation!
