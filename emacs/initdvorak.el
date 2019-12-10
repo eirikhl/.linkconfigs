@@ -47,82 +47,16 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-o") 'swiper)
 
-(whole-line-or-region-mode 1)
-
-;; Emacs Code Browser, basically OP shit
-;(require 'ecb)
-;(require 'ecb-autoloads) I want this...
 
 ;;; Manually included libraries
 ;; Directory for arbitrary libraries
 (add-to-list 'load-path "~/.emacs.d/libs")
 
+(load-library "whole-line-or-region")
+(whole-line-or-region-mode 1)
+
 ;; Loadsa stringy stuff
 (load-library "s")
-
-;;; EMMS - The Emacs Multi-Media System
-; https://www.mail-archive.com/emms-help@gnu.org/msg00482.html
-;; (setq exec-path (append exec-path '("/usr/bin")))
-(add-to-list 'load-path "~/elisp/emms/lisp")
-
-;; (require 'emms-setup)
-;; (emms-devel)
-
-
-;; (require 'emms-player-mplayer)
-;; (setq emms-source-file-default-directory "~/music/")
-;; (emms-standard)
-;; (emms-default-players)
-;; (define-emms-simple-player mplayer '(file url)
-;;       (regexp-opt '(".ogg" ".mp3" ".wav" ".mpg" ".mpeg" ".wmv" ".wma"
-;;                     ".mov" ".avi" ".divx" ".ogm" ".asf" ".mkv" "http://" "mms://"
-;;                     ".rm" ".rmvb" ".mp4" ".flac" ".vob" ".m4a" ".flv" ".ogv" ".pls"))
-;;       "mplayer" "-slave" "-quiet" "-really-quiet" "-fullscreen")
-
-(setq exec-path (append exec-path '("/usr/bin")))
-;; (require 'emms-setup)
-;; (require 'emms-player-mplayer)      ; load mplayer
-;; (emms-all)
-;; (emms-default-players)
-;; (setq emms-source-file-default-directory "~/music")
-;; (emms-add-directory-tree emms-source-file-default-directory)
-
-;; (define-emms-simple-player mplayer-mp3 '(file url)
-;;   "\\.[mM][pP][23]$" "mplayer")
-
-;; (define-emms-simple-player mplayer-ogg '(file)
-;;   (regexp-opt '(".ogg" ".OGG" ".FLAC" ".flac" )) "mplayer")
-
-;; (define-emms-simple-player mplayer-playlist '(streamlist)
-;;   "http://" "mplayer" "-playlist")
-
-;; (define-emms-simple-player mplayer-list '(file url)
-;;   (regexp-opt '(".m3u" ".pls")) "mplayer" "-playlist")
-
-;; (define-emms-simple-player mplayer-video '(file url)
-;;   (regexp-opt '(".ogg" ".mp3" ".wav" ".mpg" ".mpeg" ".wmv"
-;;                 ".wma" ".mov" ".avi" ".divx" ".ogm" ".asf"
-;;                 ".mkv" "http://")) "mplayer")
-
-;; (setq emms-player-list '(emms-player-mplayer-mp3
-;;                          emms-player-mplayer-ogg
-;;                          emms-player-mplayer-playlist
-;;                          emms-player-mplayer-video
-;;                          emms-player-mplayer-list
-;;                          ))
-
-;; (setq emms-playlist-buffer-name "*EMMS*")
-
-;; (setq emms-info-asynchronously t)
-
-;; (setq emms-stream-default-action "play")
-
-;; (defun emms-add-universe-synchronously ()
-;;   (interactive)
-;;   (let ((emms-info-asynchronously nil))
-;;     (emms-add-directory-tree emms-source-file-default-directory)
-;;      (message "Thud!")))
-
 
 ;;;; Various keybindings I think make sense
 ;;; Important note! C-m == enter/return
@@ -360,14 +294,19 @@
 ; (load-theme 'base16-railscasts)
 ; (load-theme 'adwaita)
 
+;(use-package spacemacs-theme
+;  :ensure t
+;  :init
+;  (load-theme 'spacemacs-dark t)
+;  (setq spacemacs-theme-org-agenda-height nil)
+;  (setq spacemacs-theme-org-height nil))
 (use-package spacemacs-theme
-  :ensure t
-  :init
-  (load-theme 'spacemacs-dark t)
-  (setq spacemacs-theme-org-agenda-height nil)
-  (setq spacemacs-theme-org-height nil))
+  :ensure spacema
+  :defer spacemacs-theme
+  :init (load-theme 'spacemacs-dark t))
 
 (use-package spaceline
+  :ensure spaceline
   :demand t
   :init
   (setq powerline-default-separator 'arrow-fade)
@@ -419,10 +358,4 @@
  '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 83 :width normal))))
  '(hl-line ((t (:background "dim gray")))))
 
-
-;;;; JDEE
-;; (add-to-list 'load-path (format "%s/dist/jdee-2.4.1/lisp" "~/.emacs.d/libs/"))
-;; (autoload 'jde-mode "jde" "JDE mode" t)
-;; (setq auto-mode-alist
-      ;; (append '(("\\.java\\'" . jde-mode)) auto-mode-alist))
 
