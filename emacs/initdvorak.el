@@ -11,7 +11,8 @@
 
 ;;;; Debug
 (setq debug-on-error t)
-(setq debug-on-quit t)
+; Apparently this has caused all my troubles :( Finally it's over. Keeping as a reminder of evil
+;; (setq debug-on-quit t)
 ;;;; Various keybindings I think make sense
 ;;; Important note! C-m == enter/return
 (global-unset-key (kbd "C-|"))
@@ -66,6 +67,8 @@
 	ivy-count-format "%d/%d "))
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
+(require 'ivy-rich)
+(ivy-rich-mode 1)
 
 ;; Automatically install swiper
 (unless (package-installed-p 'swiper)
@@ -101,7 +104,7 @@
       ("C-q C-u" 'find-file)
       ("C-q C-j" 'save-buffers-kill-emacs) ; exit emacs
       ("M-q" 'execute-extended-command) ; map M-q to M-x
-      ("<escape> <escape>" 'ivy-immediate-done)
+      ("<escape> <escape>" 'keyboard-escape-quit)
       ("C-g" 'top-level)
       ("C-M-s" 'magit-status)
       ("C-h" 'previous-line)
@@ -346,7 +349,7 @@
      ("\\?\\?\\?+" . "#dc752f"))))
  '(package-selected-packages
    (quote
-    (ivy counsel magit gnu-elpa-keyring-update use-package)))
+    (ivy-rich ivy counsel magit gnu-elpa-keyring-update use-package)))
  '(pdf-view-midnight-colors (quote ("#b2b2b2" . "#292b2e"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
